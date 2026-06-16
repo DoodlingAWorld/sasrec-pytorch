@@ -73,9 +73,7 @@ class PointWiseFFN(nn.Module):
         self.dropout2 = nn.Dropout(dropout)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # EXERCISE 3 (see EXERCISES.md): implement the forward pass using the layers
-        # defined in __init__ (fc1, relu, dropout1, fc2, dropout2). Spec: tests/test_model.py
-        raise NotImplementedError("Exercise 3: implement PointWiseFFN.forward (see EXERCISES.md)")
+        return self.dropout2(self.fc2(self.dropout1(self.relu(self.fc1(x)))))
 
 
 class SASRecBlock(nn.Module):
