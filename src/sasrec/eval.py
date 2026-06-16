@@ -10,9 +10,6 @@ import torch
 from .data import left_pad_sequence
 
 
-# --------------------------------------------------------------------------- #
-# Metrics  (ndcg_at_k is an EXERCISE — see EXERCISES.md)
-# --------------------------------------------------------------------------- #
 def hit_at_k(rank: int, k: int) -> float:
     """1.0 if the single relevant item lands in the top-k (0-based rank < k)."""
     return 1.0 if rank < k else 0.0
@@ -24,8 +21,10 @@ def ndcg_at_k(rank: int, k: int) -> float:
     With one relevant item the ideal DCG is 1, so NDCG = DCG = 1 / log2(rank + 2)
     if the item is within the top-k, else 0.
     """
-    # EXERCISE 1 (see EXERCISES.md): implement this. Spec: tests/test_metrics.py
-    raise NotImplementedError("Exercise 1: implement ndcg_at_k (see EXERCISES.md)")
+    if rank >= k:
+        return 0.0
+
+    return 1.0 / math.log2(rank + 2)
 
 
 # --------------------------------------------------------------------------- #
