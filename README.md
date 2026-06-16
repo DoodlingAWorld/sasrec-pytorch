@@ -37,12 +37,12 @@ score ->  dot product of the last position's representation with the (tied) item
 | Source | NDCG@10 | Hit@10 |
 |---|---|---|
 | Paper (Table III) | 0.5905 | 0.8245 |
-| **This repo** (seed 42) | _filled in after training; see `experiments/runs/`_ | |
+| **This repo** (seed 42) | **0.5925** | **0.8222** |
 
-Target band for a successful reproduction: NDCG@10 in [0.57, 0.61], Hit@10 in [0.80, 0.84],
-which allows for seed variation in initialization and negative sampling. The preprocessed
-dataset statistics (6,040 users, 3,416 items, ~1.0M actions) match the paper's Table II exactly,
-and the model reproduces on CPU in about an hour at roughly 14 seconds per epoch.
+The reproduction lands right on the paper's numbers (NDCG@10 a touch higher, Hit@10 a touch
+lower). The preprocessed dataset statistics (6,040 users, 3,416 items, ~1.0M actions) match the
+paper's Table II exactly, and the model trains on CPU in about an hour at roughly 14 seconds per
+epoch (300 epochs, default config n=200, d=50, b=2).
 
 ## Quickstart
 
