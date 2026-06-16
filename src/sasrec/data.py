@@ -147,7 +147,7 @@ def build_user_sequences(
 
 
 # --------------------------------------------------------------------------- #
-# Leave-one-out split  (EXERCISE — see EXERCISES.md / tests/test_data.py)
+# Leave-one-out split
 # --------------------------------------------------------------------------- #
 def leave_one_out_split(
     user_seqs: dict[int, list[int]],
@@ -167,8 +167,21 @@ def leave_one_out_split(
     -------
     (user_train, user_valid, user_test) : three dicts keyed by user id.
     """
-    # EXERCISE 2 (see EXERCISES.md): implement this. Spec: tests/test_data.py
-    raise NotImplementedError("Exercise 2: implement leave_one_out_split (see EXERCISES.md)")
+    user_train: dict[int, list[int]] = {}
+    user_valid: dict[int, list[int]] = {}
+    user_test: dict[int, list[int]] = {}
+
+    for u, seq in user_seqs.items():
+        if len(seq) < 3:
+            user_train[u] = seq
+            user_valid[u] = []
+            user_test[u] = []
+        else:
+            user_train[u] = seq[:-2]
+            user_valid[u] = [seq[-2]]
+            user_test[u] = [seq[-1]]
+
+    return user_train, user_valid, user_test
 
 
 # --------------------------------------------------------------------------- #
