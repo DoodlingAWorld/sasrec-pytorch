@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual env
+.venv/
+venv/
+
+# Project-local pip proxy config (machine specific)
+pip.conf
+
+# Data (downloaded / processed) — never commit datasets
+data/raw/
+data/processed/
+*.zip
+*.dat
+
+# Experiment artifacts
+experiments/runs/
+experiments/*.pt
+experiments/*.png
+*.log
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
