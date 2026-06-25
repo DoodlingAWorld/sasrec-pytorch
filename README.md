@@ -74,7 +74,6 @@ src/sasrec/
   config.py    one dataclass for every hyperparameter (plus a fast-dev preset)
 scripts/       prepare_data.py, train.py, evaluate.py
 tests/         data, model (causality, tied embedding), metrics
-EXERCISES.md   guided, hands-on re-implementation of the core pieces
 ```
 
 ## Reproduction notes
