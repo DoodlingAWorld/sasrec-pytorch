@@ -32,9 +32,7 @@ ML1M_URL = "https://files.grouplens.org/datasets/movielens/ml-1m.zip"
 # Fallback: a Hugging Face mirror of the original ratings.dat (same `user::item::rating::ts`
 # format). Used when the primary host is unreachable (e.g. a sandbox where only
 # huggingface.co is allowlisted). md5/size match the original 1,000,209 ratings.
-ML1M_HF_RATINGS = (
-    "https://huggingface.co/datasets/nasserCha/movielens_rating_1m/resolve/main/ratings.dat"
-)
+ML1M_HF_RATINGS = "https://huggingface.co/datasets/nasserCha/movielens_rating_1m/resolve/main/ratings.dat"
 
 
 # --------------------------------------------------------------------------- #
@@ -48,12 +46,12 @@ def _make_opener(proxy: str | None):
     return urllib.request.build_opener()
 
 
-def download_ml1m(raw_dir: str, proxy: str | None = "http://fwdproxy:8080") -> str:
+def download_ml1m(raw_dir: str, proxy: str | None = None) -> str:
     """Download MovieLens-1M and return the path to ratings.dat.
 
     Tries the canonical GroupLens zip first; on failure falls back to a Hugging Face
-    mirror of ratings.dat. `proxy` is needed on Meta devvms (external egress goes
-    through fwdproxy); pass proxy=None on a machine with direct internet access.
+    mirror of ratings.dat. Pass an HTTP proxy URL if your network requires one to reach
+    the internet; leave it None for a machine with direct access.
     """
     os.makedirs(raw_dir, exist_ok=True)
     ratings_path = os.path.join(raw_dir, "ml-1m", "ratings.dat")
@@ -187,7 +185,9 @@ def leave_one_out_split(
 # --------------------------------------------------------------------------- #
 # Training Dataset
 # --------------------------------------------------------------------------- #
-def _random_neq(low: int, high: int, exclude: set[int], rng: np.random.Generator) -> int:
+def _random_neq(
+    low: int, high: int, exclude: set[int], rng: np.random.Generator
+) -> int:
     """Sample an int in [low, high) not in `exclude`."""
     t = int(rng.integers(low, high))
     while t in exclude:
@@ -260,5 +260,5 @@ def left_pad_sequence(items: list[int], max_len: int) -> np.ndarray:
     if len(items) == 0:
         return seq
     items = items[-max_len:]
-    seq[max_len - len(items):] = items
+    seq[max_len - len(items) :] = items
     return seq

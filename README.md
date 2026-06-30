@@ -58,8 +58,7 @@ python scripts/evaluate.py experiments/runs/ml1m_seed42.pt
 pytest                                   # correctness tests
 ```
 
-On a Meta devvm, external hosts route through the forward proxy
-(`pip install --proxy http://fwdproxy:8080 ...`); the dataset downloader uses it automatically.
+If your network needs an HTTP proxy to reach the internet, pass it to `download_ml1m(proxy=...)`.
 
 ## Repository layout
 
